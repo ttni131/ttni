@@ -1,12 +1,50 @@
-<div class="card control-panel">
-    <h3>[ TARGET_OPERATIONS ]</h3>
-    <div class="input-group">
-        <input type="text" id="targetName" placeholder="Ad Soyad Sorgula...">
-        <button onclick="simulateScan()">SORGULA</button>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>NEXUS CENTRAL COMMAND</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <nav class="sidebar">
+        <div class="logo">NEXUS_v4</div>
+        <button onclick="showPage('dash')">DASHBOARD</button>
+        <button onclick="showPage('query')">SORGU PANELI</button>
+        <button onclick="showPage('ddos')">DDOS ATTACK</button>
+    </nav>
+
+    <div class="main-content">
+        <section id="dash" class="page active">
+            <h2>Sistem Genel Durumu</h2>
+            <div class="stats-grid">
+                <div class="card">Ağ Trafiği: <span class="blink">GÜVENLİ</span></div>
+                <div class="card">Botnet Gücü: 4.2 Tbps</div>
+                <div class="card">Aktif Node: 12,402</div>
+            </div>
+            <div class="terminal-box" id="dash-logs"></div>
+        </section>
+
+        <section id="query" class="page">
+            <h2>İstihbarat Sorgu Paneli</h2>
+            <div class="input-panel">
+                <input type="text" id="targetName" placeholder="Ad Soyad Giriniz...">
+                <button onclick="runQuery()">VERİ TABANI ARA</button>
+            </div>
+            <div class="terminal-box" id="query-logs"></div>
+        </section>
+
+        <section id="ddos" class="page">
+            <h2>Global DDOS Command</h2>
+            <div class="input-panel">
+                <input type="text" id="targetIp" placeholder="Hedef IP (Örn: 185.x.x.x)">
+                <button class="danger-btn" onclick="runDdos()">ATTACK START</button>
+            </div>
+            <div class="terminal-box" id="ddos-logs"></div>
+        </section>
     </div>
-    <div class="input-group">
-        <input type="text" id="targetIp" placeholder="Hedef IP Adresi...">
-        <button onclick="startAttack()" id="attackBtn">DDOS BAŞLAT</button>
-    </div>
-    <div id="attack-status">BEKLENİYOR...</div>
-</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

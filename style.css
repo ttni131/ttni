@@ -1,83 +1,91 @@
-body {
-    background-color: #050505;
-    color: #00ff41;
-    font-family: 'Consolas', monospace;
-    display: flex;
-    margin: 0;
-    height: 100vh;
+:root {
+    --primary: #00ff41;
+    --danger: #ff4d4d;
+    --bg: #050505;
+    --card: rgba(15, 15, 15, 0.85);
 }
+
+body {
+    background: var(--bg);
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Arka plan efektleri */
+.scanline {
+    width: 100%; height: 2px; background: rgba(0, 255, 65, 0.1);
+    position: fixed; z-index: 10; animation: scan 4s linear infinite;
+}
+
+@keyframes scan { from { top: 0; } to { top: 100%; } }
 
 .sidebar {
-    width: 250px;
-    background: #0a0a0a;
-    border-right: 1px solid #00ff41;
+    width: 280px;
+    background: #000;
+    border-right: 1px solid var(--primary);
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    text-shadow: 0 0 10px #00ff41;
-}
+.brand { font-size: 20px; font-weight: bold; margin-bottom: 40px; text-shadow: 0 0 10px var(--primary); }
 
-.sidebar button {
-    background: transparent;
-    border: 1px solid #00ff41;
-    color: #00ff41;
+.nav-item {
     padding: 15px;
-    margin-bottom: 10px;
+    border: 1px solid transparent;
     cursor: pointer;
-    text-align: left;
+    margin-bottom: 10px;
+    transition: 0.3s;
 }
 
-.sidebar button:hover {
+.nav-item:hover, .nav-item.active {
+    border-color: var(--primary);
     background: rgba(0, 255, 65, 0.1);
 }
 
-.main-content {
-    flex-grow: 1;
-    padding: 30px;
-    overflow-y: auto;
+.nav-item.danger { color: var(--danger); }
+.nav-item.danger:hover { border-color: var(--danger); background: rgba(255, 77, 77, 0.1); }
+
+.content { flex-grow: 1; padding: 40px; position: relative; overflow-y: auto; }
+
+.tab-content { display: none; animation: fadeIn 0.5s; }
+.tab-content.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.card {
+    background: var(--card);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    padding: 25px;
+    border-radius: 5px;
 }
 
-.page { display: none; }
-.active { display: block; }
+.big-text { font-size: 40px; font-weight: bold; margin: 10px 0; }
 
 .terminal-box {
     background: #000;
-    border: 1px solid #00ff41;
-    height: 400px;
-    padding: 15px;
+    border: 1px solid var(--primary);
+    height: 350px;
     margin-top: 20px;
+    padding: 15px;
     overflow-y: auto;
-    font-size: 13px;
-    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
+    font-size: 12px;
 }
 
-.input-panel {
-    display: flex;
-    gap: 10px;
-}
+.input-container { display: flex; gap: 10px; margin-top: 20px; }
 
 input {
-    background: transparent;
-    border: 1px solid #00ff41;
-    color: #00ff41;
-    padding: 10px;
-    width: 300px;
+    background: #000; border: 1px solid var(--primary);
+    color: var(--primary); padding: 12px; flex-grow: 1; outline: none;
 }
 
-.danger-btn {
-    border-color: #ff0000;
-    color: #ff0000;
+button {
+    background: var(--primary); color: #000; border: none;
+    padding: 12px 25px; cursor: pointer; font-weight: bold;
 }
 
-.danger-btn:hover {
-    background: rgba(255, 0, 0, 0.2);
-}
-
-.blink { animation: blinker 1.5s linear infinite; }
-@keyframes blinker { 50% { opacity: 0; } }
+.btn-danger { background: var(--danger); color: white; }

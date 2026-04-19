@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Nexus Cyber Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <header>
+            <h1>[ NEXUS_OPERATIONS_CENTER ]</h1>
+            <p id="status">SİSTEM DURUMU: <span class="online">AKTİF</span></p>
+        </header>
+
+        <div class="grid">
+            <div class="card terminal">
+                <h3>Terminal_Output</h3>
+                <div id="log-container"></div>
+            </div>
+            
+            <div class="card stats">
+                <h3>Network_Analysis</h3>
+                <div class="bar-container">
+                    <div class="bar" style="height: 60%"></div>
+                    <div class="bar" style="height: 85%"></div>
+                    <div class="bar" style="height: 45%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

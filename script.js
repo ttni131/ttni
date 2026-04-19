@@ -1,45 +1,68 @@
-// Sayfa Geçişleri
-function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId).classList.add('active');
-}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHADOW OPERATIONS | COMMAND CENTER</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="noise"></div>
 
-// Log Yazdırma Sistemi
-function addLog(containerId, text, color = "#00ff41") {
-    const container = document.getElementById(containerId);
-    const line = document.createElement('div');
-    line.style.color = color;
-    line.textContent = `[${new Date().toLocaleTimeString()}] > ${text}`;
-    container.appendChild(line);
-    container.scrollTop = container.scrollHeight;
-}
+    <aside class="sidebar">
+        <div class="brand">SHADOW_NET v2.4</div>
+        <nav>
+            <div class="nav-item active" onclick="switchTab('home')">CORE_DASHBOARD</div>
+            <div class="nav-item" onclick="switchTab('search')">INTEL_QUERY</div>
+            <div class="nav-item danger" onclick="switchTab('ddos')">ATTACK_VECTOR</div>
+            <div class="nav-item" onclick="switchTab('logs')">GLOBAL_LOGS</div>
+        </nav>
+        <div class="system-stats">
+            <p>CPU: <span id="cpu-load">0%</span></p>
+            <p>THREAT LEVEL: <span style="color: #ff0000;">CRITICAL</span></p>
+        </div>
+    </aside>
 
-// Otomatik Dashboard Logları
-setInterval(() => {
-    const sysLogs = ["Port 80 tarandı", "Yeni zombi bağlandı", "Firewall stabil", "Ping: 24ms"];
-    addLog("dash-logs", sysLogs[Math.floor(Math.random() * sysLogs.length)]);
-}, 3000);
+    <main class="content">
+        <section id="home" class="tab-content active">
+            <div class="header-box">
+                <h1>SİSTEM DURUMU: <span class="glitch" data-text="BAĞLI">BAĞLI</span></h1>
+            </div>
+            <div class="grid-layout">
+                <div class="card glass">
+                    <h3>AKTİF NODLAR</h3>
+                    <div class="big-text">14,209</div>
+                    <p>Zombi Botlar Çevrimiçi</p>
+                </div>
+                <div class="card glass">
+                    <h3>AĞ GÜCÜ</h3>
+                    <div class="big-text">8.4 TBPS</div>
+                    <p>Maksimum Kapasite</p>
+                </div>
+            </div>
+        </section>
 
-// Sorgu Simülasyonu
-function runQuery() {
-    const name = document.getElementById('targetName').value;
-    if(!name) return;
-    addLog("query-logs", `${name} için derin tarama başlatıldı...`, "yellow");
-    setTimeout(() => addLog("query-logs", `SONUÇ: ${name} bulundu. IP: 176.232.xx.xx`, "#00ff41"), 2000);
-}
+        <section id="search" class="tab-content">
+            <h2>İSTİHBARAT SORGULAMA</h2>
+            <div class="input-container">
+                <input type="text" id="targetInfo" placeholder="Ad Soyad veya TCKN Girin...">
+                <button onclick="startIntelSearch()">VERİ TABANINI TETİKLE</button>
+            </div>
+            <div class="terminal-box" id="search-console"></div>
+        </section>
 
-// DDOS Simülasyonu
-function runDdos() {
-    const ip = document.getElementById('targetIp').value;
-    if(!ip) return;
-    addLog("ddos-logs", `SALDIRI BAŞLATILIYOR: ${ip}`, "red");
-    let count = 0;
-    let attackInt = setInterval(() => {
-        addLog("ddos-logs", `Paket gönderildi: ${Math.random().toString(36).substring(7)} >> ${ip}`, "red");
-        count++;
-        if(count > 10) {
-            clearInterval(attackInt);
-            addLog("ddos-logs", "HEDEF ÇEVRİMDIŞI (SİMÜLASYON TAMAMLANDI)", "white");
-        }
-    }, 500);
-}
+        <section id="ddos" class="tab-content">
+            <h2 style="color: #ff0000;">ATTACK CONTROL (V-FLOOD)</h2>
+            <div class="input-container">
+                <input type="text" id="targetIp" placeholder="Hedef IP Adresi (örn: 192.168.x.x)">
+                <button class="btn-danger" onclick="executeDdos()">SALDIRIYI BAŞLAT</button>
+            </div>
+            <div class="terminal-box" id="ddos-console"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

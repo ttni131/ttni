@@ -1,35 +1,83 @@
-.input-group {
-    margin-bottom: 15px;
+body {
+    background-color: #050505;
+    color: #00ff41;
+    font-family: 'Consolas', monospace;
+    display: flex;
+    margin: 0;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background: #0a0a0a;
+    border-right: 1px solid #00ff41;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #00ff41;
+}
+
+.sidebar button {
+    background: transparent;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.sidebar button:hover {
+    background: rgba(0, 255, 65, 0.1);
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.page { display: none; }
+.active { display: block; }
+
+.terminal-box {
+    background: #000;
+    border: 1px solid #00ff41;
+    height: 400px;
+    padding: 15px;
+    margin-top: 20px;
+    overflow-y: auto;
+    font-size: 13px;
+    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.input-panel {
     display: flex;
     gap: 10px;
 }
 
 input {
-    background: #000;
+    background: transparent;
     border: 1px solid #00ff41;
     color: #00ff41;
     padding: 10px;
-    flex-grow: 1;
-    outline: none;
+    width: 300px;
 }
 
-button {
-    background: #00ff41;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #008f11;
-    box-shadow: 0 0 10px #00ff41;
-}
-
-#attack-status {
-    font-size: 12px;
-    margin-top: 10px;
+.danger-btn {
+    border-color: #ff0000;
     color: #ff0000;
 }
+
+.danger-btn:hover {
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.blink { animation: blinker 1.5s linear infinite; }
+@keyframes blinker { 50% { opacity: 0; } }

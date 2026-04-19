@@ -1,32 +1,35 @@
-const logContainer = document.getElementById('log-container');
-const logs = [
-    "[INFO] Veritabanı bağlantısı kuruluyor...",
-    "[WARN] Bilinmeyen IP adresi algılandı: 192.168.1.105",
-    "[INFO] Güvenlik duvarı bypass denemesi: Başarılı",
-    "[ERROR] Sunucu yanıt vermiyor... Yeniden deneniyor.",
-    "[INFO] Paket analizi başlatıldı: Port 80, 443",
-    "[CRITICAL] Şifreli veri bloğu çözülüyor...",
-    "[INFO] Ağ trafiği optimize ediliyor (Local -> Global)"
-];
+function simulateScan() {
+    const name = document.getElementById('targetName').value;
+    if(!name) return;
+    
+    addCustomLog(`[SİSTEM] ${name} için veritabanı taranıyor...`);
+    setTimeout(() => addCustomLog(`[SONUÇ] Kayıt bulundu: ${name} - Lokasyon: Türkiye`), 1500);
+}
 
-// Ekrana sürekli yazı yazdırma fonksiyonu
-function addLog() {
+function startAttack() {
+    const ip = document.getElementById('targetIp').value;
+    const btn = document.getElementById('attackBtn');
+    const status = document.getElementById('attack-status');
+
+    if(!ip) return;
+
+    btn.disabled = true;
+    status.textContent = "SALDIRI BAŞLATILDI: " + ip;
+    
+    addCustomLog(`[ATTACK] UDP Flood başlatıldı: ${ip}`);
+    addCustomLog(`[ATTACK] Paket gönderiliyor: 64kb...`);
+
+    // 5 saniye sonra durdurma simülasyonu
+    setTimeout(() => {
+        btn.disabled = false;
+        status.textContent = "SALDIRI TAMAMLANDI.";
+        addCustomLog(`[OK] Hedef sunucu (IP: ${ip}) geçici olarak devre dışı.`);
+    }, 5000);
+}
+
+function addCustomLog(message) {
     const logEntry = document.createElement('div');
-    logEntry.textContent = `> ${logs[Math.floor(Math.random() * logs.length)]}`;
+    logEntry.textContent = `> ${message}`;
+    logEntry.style.color = "#ff0000"; // Saldırı loglarını kırmızı yapalım
     logContainer.appendChild(logEntry);
-
-    if (logContainer.childNodes.length > 15) {
-        logContainer.removeChild(logContainer.firstChild);
-    }
 }
-
-// Barları hareket ettirme
-function updateBars() {
-    const bars = document.querySelectorAll('.bar');
-    bars.forEach(bar => {
-        bar.style.height = Math.floor(Math.random() * 100) + "%";
-    });
-}
-
-setInterval(addLog, 1200);
-setInterval(updateBars, 2000);
